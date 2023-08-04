@@ -1,0 +1,10 @@
+<section class="featured-products">
+    <div class="flex-container mb-2">
+      <div class="flex-item" *ngFor="let product of products" >
+        <div class="product-item" (click)="goToProduct(product.id)" >
+          <img [src]="product.foto_principal" alt="Product Image" >
+        </div>
+      </div>
+    </div>
+</section>
+  

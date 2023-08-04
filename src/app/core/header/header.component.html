@@ -1,0 +1,175 @@
+<header >
+
+    <div class="wrapperheader px-3 sm:px-6 ">
+            <nav id="menu" class="flex align-items-center py-3 push">
+                <div class="leftnav">
+                    <ul class="list-none flex pl-0">
+                      <li class="pr-2 border-right-1 cursor-pointer border-surface-100" (click)="toggleSubMenu()" [ngClass]="{'submenu-open': showSubMenu}">
+                        <a>Homem</a>
+                        <div *ngIf="showSubMenu" class="sub-menu-wrapper">
+                          <ul class="sub-menu p-submenu-list list-none pl-2 background-color-white">
+                            <li *ngFor="let item of subMenuItems" class="py-1">
+                              <a [routerLink]="item.routerLink" class="no-underline">{{ item.label }}</a>
+                            </li>
+                          </ul>
+                        </div>
+                      </li>
+
+                      <li class="pl-2 cursor-pointer border-surface-100" (click)="toggleSubMenuA('mulher')" [ngClass]="{'submenu-open': showSubMenuMulher}">
+                        <a>Mulher</a>
+                        <div *ngIf="showSubMenuMulher" class="sub-menu-wrapper1">
+                          <ul class="sub-menu p-submenu-list list-none pl-2 background-color-white">
+                            <li *ngFor="let item of subMenuItemsMulher" class="py-1">
+                              <a [routerLink]="item.routerLink" class="no-underline">{{ item.label }}</a>
+                            </li>
+                          </ul>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                  
+                  
+            
+                <div class="mr-5 ml-5">
+                    <a routerLink="/home"><img src="assets/images/logo.png" alt="Image" height="60"></a>
+                </div>
+            
+                <div class="rightnav">
+                    <ul class="list-none flex pl-0">
+                        <li class="pr-2 border-right-1 border-surface-100 cursor-pointer" (click)="toggleSubMenuA('crianca')" [ngClass]="{'submenu-open': showSubMenuCrianca}">
+                            <a>Criança</a>
+                            <div *ngIf="showSubMenuCrianca" class="sub-menu-wrapper2">
+                              <ul class="sub-menu p-submenu-list list-none pl-2 background-color-white">
+                                <li *ngFor="let item of subMenuItemsCrianca" class="py-1">
+                                  <a [routerLink]="item.routerLink" class="no-underline">{{ item.label }}</a>
+                                </li>
+                              </ul>
+                            </div>
+                          </li>
+                        <li class="pl-2 cursor-pointer" (click)="toggleSubMenuA('acessorios')" [ngClass]="{'submenu-open': showSubMenuAcessorios}">
+                            <a>Acessórios</a>
+                            <div *ngIf="showSubMenuAcessorios" class="sub-menu-wrapper3">
+                              <ul class="sub-menu p-submenu-list list-none pl-2 background-color-white">
+                                <li *ngFor="let item of subMenuItemsAcessorios" class="py-1">
+                                  <a [routerLink]="item.routerLink" class="no-underline">{{ item.label }}</a>
+                                </li>
+                              </ul>
+                            </div>
+                          </li>
+                    </ul>
+                </div>
+            </nav>
+          
+          <div id="topicons" class="push lg:flex w-full lg:w-auto hidden py-3 lg:py-0 ">
+            <ul class="list-none p-0 m-0 flex w-full" style="min-height: 30px;">
+                
+                <li class="flex flex-auto lg:flex-initial justify-content-center" *ngIf="loggedin">
+                   <span class="text-900 font-medium inline-flex align-items-center lg:pr-2"> Bem vindo(a) , {{ name }} </span>
+                </li>
+
+                <li class="flex flex-auto lg:flex-initial justify-content-center" *ngIf="isAdmin">
+                    <a routerLink="/admin" class="text-900 text-xl font-medium inline-flex align-items-center cursor-pointer no-underline lg:pr-2 hover:text-primary">
+                        <i class="pi pi-cog"></i>
+                    </a>
+                </li>
+
+                <li class="flex flex-auto lg:flex-initial justify-content-center">
+                    <a pripple=""
+                        class="p-ripple no-underline p-element text-900 font-medium inline-flex align-items-center cursor-pointer lg:pr-2 hover:text-primary">
+                        <i class="pi pi-search text-xl"></i><span class="hidden">Search</span><span
+                            class="p-ink"></span>
+                    </a>
+                </li>
+                <li class="flex flex-auto lg:flex-initial justify-content-center" *ngIf="loggedin">
+                    <a pripple="" routerLink="/wishlist"
+                        class="p-ripple no-underline p-element text-900 font-medium inline-flex align-items-center cursor-pointer lg:px-2 hover:text-primary">
+                        <i class="pi pi-heart text-xl"></i><span class="hidden">Favorites</span><span
+                            class="p-ink"></span>
+                    </a>
+                </li>
+
+                <li class="flex flex-auto lg:flex-initial justify-content-center" *ngIf="!loggedin">
+                    <a routerLink="/registeruser" class=" p-ripple text-900 text-xl font-medium inline-flex align-items-center cursor-pointer no-underline lg:pr-2 hover:text-primary">
+                        <i class="pi pi-user-plus text-xl"></i>
+                    </a>
+                </li>
+                
+
+                <li class="flex flex-auto lg:flex-initial justify-content-center" *ngIf="!loggedin">
+                    <a pripple="" class="p-ripple no-underline p-element text-900 font-medium inline-flex align-items-center cursor-pointer lg:px-2 hover:text-primary"
+                      (click)="showLoginDialog()">
+                      <i class="pi pi-sign-in text-xl"></i><span class="hidden">Sign In</span><span class="p-ink"></span>
+                    </a>
+                  </li>
+                  
+                  <p-dialog [(visible)]="loginDialogVisible" [modal]="true" [responsive]="true" [style]="{ width: '50vw' }">
+                    <app-login (onLogin)="onLogin($event)"></app-login>
+                  </p-dialog>
+
+
+                  <li class="flex flex-auto lg:flex-initial justify-content-center" *ngIf="loggedin">
+                    <a pripple="" routerLink="/profile"
+                        class="p-ripple no-underline p-element text-900 font-medium inline-flex align-items-center cursor-pointer lg:px-2 hover:text-primary">
+                        <i class="pi pi-user text-xl"></i><span class="hidden">Profile</span><span
+                            class="p-ink"></span>
+                    </a>
+                </li>
+
+
+                <li class="flex flex-auto lg:flex-initial justify-content-center" *ngIf="loggedin">
+                    <a pripple="" (click)="onLogout()"
+                        class="p-ripple no-underline p-element text-900 font-medium inline-flex align-items-center cursor-pointer lg:px-2 hover:text-primary">
+                        <i class="pi pi-sign-out text-xl"></i><span class="hidden">Logout</span><span
+                            class="p-ink"></span>
+                    </a>
+                </li>
+
+
+
+                <li class="flex flex-auto lg:flex-initial justify-content-center" *ngIf="loggedin">
+                    <a pripple="" routerLink="/cart"
+                        class="p-ripple no-underline p-element text-900 font-medium inline-flex align-items-center cursor-pointer lg:px-2 hover:text-primary">
+                        <i pbadge="" class="p-element pi pi-shopping-cart text-xl p-overlay-badge">
+                            <span id="pr_id_2_badge" class="p-badge p-component p-badge-dot"></span>
+                        </i>
+                        <span class="hidden">Cart</span><span class="p-ink"></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+        <div class="flex w-full lg:w-auto border-y-1 surface-border surface-overlay lg:hidden py-3 lg:py-0">
+            <ul class="list-none p-0 m-0 flex w-full" style="min-height: 30px;">
+                <li class="flex flex-auto lg:flex-initial justify-content-center">
+                    <a pripple=""
+                        class="p-ripple p-element text-900 font-medium inline-flex align-items-center cursor-pointer lg:pr-3 hover:text-primary">
+                        <i class="pi pi-search text-xl"></i><span class="hidden">Search</span><span class="p-ink"></span>
+                    </a>
+                </li>
+                <li class="flex flex-auto lg:flex-initial justify-content-center">
+                    <a pripple=""
+                        class="p-ripple p-element text-900 font-medium inline-flex align-items-center cursor-pointer lg:px-3 hover:text-primary">
+                        <i class="pi pi-heart text-xl p-overlay-badge p-element" pbadge style="font-size: 2rem" value="2"></i><span class="hidden">Favorites</span><span class="p-ink" ></span>
+                    </a>
+                </li>
+                <li class="flex flex-auto lg:flex-initial justify-content-center">
+                    <a pripple=""
+                        class="p-ripple p-element text-900 font-medium inline-flex align-items-center cursor-pointer lg:px-3 hover:text-primary">
+                        <i class="pi pi-user text-xl"></i><span class="hidden">Sign In</span><span class="p-ink"></span>
+                    </a>
+                </li>
+                <li class="flex flex-auto lg:flex-initial justify-content-center">
+                    <a pripple=""
+                        class="p-ripple p-element text-900 font-medium inline-flex align-items-center cursor-pointer lg:pl-3 pr-1 hover:text-primary">
+                        <i pbadge="" class="p-element pi pi-shopping-cart text-xl p-overlay-badge">
+                            <span id="pr_id_3_badge" class="p-badge p-component p-badge-dot"></span>
+                        </i>
+                        <span class="hidden">Cart</span><span class="p-ink"></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+</header>
+

@@ -1,0 +1,50 @@
+<section class="wrapper">
+
+  <aside class="filter-products">
+      <div class="filter-section">
+      <label for="tipoDeProdutoFilter">Tipo de Produto:</label>
+      <p-dropdown [options]="tipoDeProdutos" id="tipoDeProdutoFilter" [(ngModel)]="tipoDeProdutoFilter"></p-dropdown>
+    </div>
+    <div class="filter-section mt-2">
+      <label for="corFilter">Cor:</label>
+      <p-dropdown [options]="cores" id="corFilter" [(ngModel)]="corFilter"></p-dropdown>
+    </div>
+    <div class="filter-section mt-2">
+      <button pButton type="button" label="Apply Filters" (click)="applyFilters()"></button>
+    </div>
+    <div class="filter-section mt-2">
+      <button pButton type="button" label="Reset Filters" (click)="resetFilters()"></button>
+    </div>
+    </aside>
+    
+  
+    <main>
+      <h1 class="flex justify-content-center text-5xl">Homem</h1>
+      <p>Total de Resultados: {{ getTotalItemsShown() }} de {{ totalItems }}</p>
+      <div class="product-list wrappercard ">
+        <div class="product-card " *ngFor="let produto of displayedProdutos">
+          <div class="product-image flex justify-content-center ">
+            <img [src]="isHovered[produto.id] ? produto.foto_secundaria : produto.foto_principal" alt="Product Image" (mouseenter)="toggleHover(produto)" (mouseleave)="toggleHover(produto)" (click)="goToProduct(produto.id)" class="cursor-pointer" [style.height.px]="255">
+  
+  
+            <i *ngIf="loggedIn" class="pi" [ngClass]="{'pi-heart': !produto.isFavorite, 'pi-heart-fill': produto.isFavorite, 'text-red': produto.isFavorite}" [style.color]="produto.isFavorite ? 'red' : ''" (click)="addToFavorites(produto)"></i>
+  
+            <p-toast></p-toast>
+  
+          </div>
+          <div class="product-details">
+            <p class="flex justify-content-center text-2xl">{{ produto.marca }}</p>
+            <p class="flex flex justify-content-center text-1xl">{{ produto.nome }}</p>
+            <p class="flex flex justify-content-center text-2xl">{{ produto.preco | currency: 'EUR' }}</p>
+            <div *ngIf="loggedIn">
+              <app-addtocart [productId]="produto.id"></app-addtocart>  
+              </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="see-more-section">
+        <button pButton type="button" label="See More" (click)="loadMore()"></button>
+      </div>
+    </main>
+  </section>

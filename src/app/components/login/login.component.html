@@ -1,0 +1,23 @@
+<div class="login-container">
+    <h2 class="login-title">Sign In</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <div class="p-inputgroup pb-2">
+        <span class="p-inputgroup-addon">
+          <i class="pi pi-envelope"></i>
+        </span>
+        <input type="email" id="email" formControlName="email" class="p-inputtext" placeholder="Email" />
+      </div>
+      <div class="p-inputgroup pb-3">
+        <span class="p-inputgroup-addon">
+          <i class="pi pi-lock"></i>
+        </span>
+        <input type="password" id="password" formControlName="password" class="p-inputtext" placeholder="Password" />
+      </div>
+      <button  type="submit" class="p-button p-button-primary" [disabled]="loginForm.invalid">Sign In</button>
+    </form>
+  </div>
+  
+ <!-- <button class="p-button p-button-primary" (click)="closeLoginDialog()">Register Account</button> -->
+
+
+<p-toast></p-toast>

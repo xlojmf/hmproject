@@ -1,0 +1,23 @@
+<div *ngIf="wishlist.length === 0">
+  <p>No products in the wishlist.</p>
+</div>
+
+<div class="wishlist-container">
+  <div *ngFor="let produto of wishlist" class="wishlist-item">
+    <div class="wishlist-image">
+      <img [src]="produto.foto_principal" alt="Product Image"  [style.height.px]="255">
+    </div>
+    <div class="wishlist-details">
+      <p class="wishlist-marca">{{ produto.marca }}</p>
+      <p class="wishlist-nome">{{ produto.nome }}</p>
+      <p class="wishlist-preco">{{ produto.preco | currency: 'EUR' }}</p>
+    </div>
+    <div class="wishlist-actions">
+      <app-addtocart [productId]="produto.id" (click)="removeFromWishlist(produto)"></app-addtocart>  
+      <button pButton type="button" icon="pi pi-trash" class="p-button-danger" (click)="removeFromWishlist(produto)">Remove</button>
+    </div>
+  </div>
+</div>
+
+  
+  

@@ -1,0 +1,5 @@
+
+/* ideia para aparecer e nao aparecer com ngif*/
+  .authenticated .add-to-cart {
+    display: inline-block;
+  }

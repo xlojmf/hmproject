@@ -1,0 +1,10 @@
+<div class="sales-carousel">
+    <p-carousel [value]="images" [numVisible]="1" [circular]="true" [autoplayInterval]="3000" [showIndicators]="false" styleClass="sales-slider">
+        <ng-template pTemplate="item" let-image>
+            <div class="carousel-item">
+                <img [src]="image.src" [alt]="image.alt" class="carousel-image" />
+                <p class="carousel-title text-7xl -mt-2">SALDOS</p>
+            </div>
+        </ng-template>
+    </p-carousel>
+</div>

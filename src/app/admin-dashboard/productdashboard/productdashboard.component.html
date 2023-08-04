@@ -1,0 +1,109 @@
+<p-table #dt1 [value]="products" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5,10,20]" [globalFilterFields]="['nome', 'marca', 'cor', 'tipo_de_produto']" >
+    <ng-template pTemplate="caption">
+
+            <button pButton label="Clear" class="p-button-outlined mr-5" icon="pi pi-filter-slash" (click)="dt1.filterGlobal('', 'contains')"></button>
+            <span class="p-input-icon-left ml-auto">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" (input)="onInput($event)" placeholder="Search keyword" />
+            </span>
+
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Image**</th>
+        <th>Name</th>
+        <th>Brand</th>
+        <th>Description</th>
+        <th>Type</th>
+        <th>Color</th>
+        <th>Price</th>
+        <th>Featured</th>
+        <th>Actions</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product>
+
+      <tr [pSelectableRow]="product">
+        <td> 
+            <p-image [src]="product.foto_principal" alt="Product Image"[preview]="true" width="50"></p-image>
+        </td>
+        <td>
+            <input type="text" pInputText [(ngModel)]="product.nome" (ngModelChange)="updateProduct(product)" [size]="14"/>
+        </td>
+        <td>
+            <input type="text" pInputText [(ngModel)]="product.marca" (ngModelChange)="updateProduct(product)" [size]="14"/>
+        </td>
+        <td>
+            <textarea pInputTextarea type="text" rows="5" cols="25" [(ngModel)]="product.descricao" (ngModelChange)="updateProduct(product)"></textarea>
+        </td>
+        <td>
+            <p-dropdown [options]="tipoDeProdutos" id="tipoDeProdutoFilter" [(ngModel)]="product.tipo_de_produto" (ngModelChange)="updateProduct(product)" ></p-dropdown>
+        </td>
+        <td>
+            <p-dropdown [options]="cores" id="corFilter"  [(ngModel)]="product.cor" (ngModelChange)="updateProduct(product)"></p-dropdown>
+        </td>
+        <td>
+            <p-inputNumber [(ngModel)]="product.preco" (ngModelChange)="updateProduct(product)" mode="currency" inputId="currency-portugal" currency="EUR" locale="pt-PT" [size]="5" ></p-inputNumber>
+        </td>
+        <td>
+            <p-checkbox [(ngModel)]="product.featured" [binary]="true" inputId="binary" (ngModelChange)="updateProduct(product)"></p-checkbox>
+        </td>
+        <td>
+            <button pButton type="button" icon="pi pi-trash" class="p-button-danger" (click)="deleteProduct(product.id, $event)"></button>          
+        </td>
+
+      </tr>
+    </ng-template>
+  </p-table>
+  
+  <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
+
+
+
+
+  <section class="py-3">
+    <h1 class="flex justify-content-center text-5xl">Create Product</h1>
+  
+    <div class="p-fluid">
+      <form (ngSubmit)="createProduct(newProduct)" #productForm="ngForm">
+        <div class="p-field">
+          <label for="nome">Name: </label>
+          <input id="nome" type="text" pInputText [(ngModel)]="newProduct.nome" name="nome" required class="mb-2 mt-2">
+        </div>
+        <div class="p-field">
+          <label for="brand">Brand: </label>
+          <input id="brand" type="text" pInputText [(ngModel)]="newProduct.marca" name="brand" required class="mb-2">
+        </div>
+        <div class="p-field">
+          <label for="descricao">Description: </label>
+          <textarea id="descricao" type="text" rows="5" cols="30" pInputTextarea [(ngModel)]="newProduct.descricao" name="description" required class="mb-2"></textarea>
+        </div>
+<!--        <div class="p-field">
+          <label for="image">Image: </label>
+          <input id="image" type="text" pInputText [(ngModel)]="newProduct.foto_principal" name="image" required class="mb-2">
+        </div>
+        <div class="p-field">
+          <label for="secondaryImage">Secondary Image: </label>
+          <input id="secondaryImage" type="text" pInputText [(ngModel)]="newProduct.foto_secundaria" name="secondaryImage" required class="mb-2">
+        </div> -->
+        <div class="p-field">
+          <label for="type">Type</label>
+          <p-dropdown [options]="tipoDeProdutos" id="tipoDeProdutoFilter" [(ngModel)]="newProduct.tipo_de_produto" name="type" ></p-dropdown>
+        </div>
+        <div class="p-field">
+          <label for="color">Color</label>
+          <p-dropdown [options]="cores" id="corFilter"  [(ngModel)]="newProduct.cor" name="color" class="mb-2"></p-dropdown>
+        </div>
+        <div class="p-field">
+          <label for="price">Price</label>
+          <p-inputNumber id="price" type="number" [(ngModel)]="newProduct.preco" name="price" currency="EUR" locale="pt-PT" class="mb-2"></p-inputNumber>
+        </div>
+  
+        <button pButton type="submit" label="Save" [disabled]="!productForm.form.valid" class="mr-2 mt-5"></button>
+      </form>
+    </div>
+  </section>
+
+  
+
+  <p-toast></p-toast>

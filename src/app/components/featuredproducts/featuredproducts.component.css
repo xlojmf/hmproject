@@ -1,0 +1,33 @@
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.flex-item {
+  width: 25%; 
+  box-sizing: border-box;
+  padding: 10px;
+}
+
+@media (max-width: 768px) {
+  /* Tablets */
+  .flex-item {
+    width: 33%; 
+  }
+}
+
+@media (max-width: 480px) {
+  /* Dispositivos móveis */
+  .flex-item {
+    width: 50%; 
+  }
+}
+
+.product-item:hover {
+  border: 1px solid red;
+}
+
+.flex-item img {
+  width: 100%;
+  height: auto;
+}

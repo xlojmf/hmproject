@@ -1,0 +1,25 @@
+<section class="product-container" *ngIf="product">
+
+    <h1 class="flex justify-content-center text-5xl">{{ product.marca }}</h1>
+    <h2 class="flex justify-content-center text-3xl">{{ product.nome }}</h2>
+
+    <section class="flex justify-content-center">
+      <div class="product-image">
+        <img [src]="product.foto_principal" alt="Product Image">
+      </div>
+      <div class="product-image">
+        <img [src]="product.foto_secundaria" alt="Product Image">
+      </div>
+    </section>
+
+    <div class="product-details">
+      <p class="flex justify-content-center text-2xl ">{{ product.tipo_de_produto }} {{ product.cor }}</p>
+      <p class="flex justify-content-center  text-2xl">{{ product.preco | currency: 'EUR' }}</p>
+      <p class="flex text-center  sm:px-4 mx4  lg:px-8 mx-8  text-1xl">{{ product.descricao }}</p>    
+    </div>
+
+  <div *ngIf="loggedIn">
+  <app-addtocart [productId]="product.id"></app-addtocart>  
+  </div>
+  
+</section>

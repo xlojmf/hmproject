@@ -1,0 +1,54 @@
+<h1 class="text-5xl justify-content-center flex pb-2">Register on our website</h1>
+
+<form [formGroup]="registerForm" class="mb-5">
+    <div class="p-fluid mb-5 ">
+      <div class="p-field pt-2">
+        <label class="flex pb-2" for="name">Name: </label>
+        <input type="text" id="name" formControlName="name" pInputText required>
+      </div>
+      <div class="p-field pt-2">
+        <label class="flex pb-2" for="email">Email: </label>
+        <input type="email" id="email" formControlName="email" pInputText required>
+      </div>
+    <div class="p-field">
+        <label class="flex pb-2" for="password">Password: </label>
+        <p-password formControlName="password" id="confirmPassword"  [toggleMask]="true" required>
+            <ng-template pTemplate="header">
+                <h6>Pick a password</h6>
+            </ng-template>
+            <ng-template pTemplate="footer">
+                <p-divider></p-divider>
+                <p class="mt-2">Suggestions</p>
+                <ul class="pl-2 ml-2 mt-0" style="line-height: 1.5">
+                    <li>At least one lowercase</li>
+                    <li>At least one uppercase</li>
+                    <li>At least one numeric</li>
+                    <li>Minimum 8 characters</li>
+                </ul>
+            </ng-template>
+        </p-password>
+    </div>
+      <div class="p-field pt-2">
+        <label class="flex pb-2" for="adress">Address: </label>
+        <input type="text" id="adress" formControlName="adress" pInputText required>
+      </div>
+      <div class="p-field pt-2">
+        <label class="flex pb-2" for="postalcode">Postal Code: </label>
+        <input type="text" id="postalcode" formControlName="postalcode" pInputText required>
+      </div>
+      <div class="p-field pt-2">
+        <label class="flex pb-2" for="country">Country: </label>
+        <input type="text" id="country" formControlName="country" pInputText required>
+      </div>
+    </div>
+    
+    <button class="" pButton type="button" label="Submit" (click)="registerUser()" [disabled]="!registerForm.valid"></button>
+  </form>
+  
+  <!-- Modal de confirmação -->
+  <p-dialog [(visible)]="confirmationDialog" [modal]="true" [responsive]="true" [style]="{ width: '50vw' }">
+    <p>Registration completed successfully!</p>
+    <button pButton type="button" label="OK" (click)="redirectToHomePage()"></button>
+  </p-dialog>
+  
+  <p-toast></p-toast>

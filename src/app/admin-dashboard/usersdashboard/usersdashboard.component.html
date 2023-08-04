@@ -1,0 +1,71 @@
+<p-table [value]="users" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5,10,20]">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-user>
+        <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.name }}</td>
+            <td>{{ user.email }}</td>
+            <td>
+                <select id="role" pInputSelect [(ngModel)]="user.role" (ngModelChange)="updateUser(user)">
+                    <option value="admin">Admin</option>
+                    <option value="user">User</option>
+                </select>
+            </td>
+            <td> 
+                <p-checkbox [(ngModel)]="user.active" [binary]="true" (ngModelChange)="updateUser(user)"></p-checkbox>
+            </td>
+
+            <td>
+                <button pButton type="button" icon="pi pi-trash" class="p-button-danger" (click)="deleteUser(user.id, $event)"></button>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+<p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
+
+<section class="py-3">
+
+    <button pButton type="button" icon="pi pi-plus" label="Add User" (click)="showDialog()"></button>
+
+    <p-dialog [(visible)]="displayDialog" [modal]="true" [responsive]="true" [style]="{ width: '50vw' }"
+        [header]="newUser ? 'Add User' : 'Edit User'">
+        <div class="p-fluid">
+            <div class="p-field">
+                <label for="name">Name</label>
+                <input type="text" id="name" pInputText [(ngModel)]="selectedUser.name" required>
+            </div>
+            <div class="p-field">
+                <label for="email">Email</label>
+                <input type="email" id="email" pInputText [(ngModel)]="selectedUser.email" required>
+            </div>
+            <div class="p-field">
+                <label for="password">Password</label>
+                <input type="password" id="password" pInputText [(ngModel)]="selectedUser.password" required>
+            </div>
+            <div class="p-field">
+                <label for="role">Role</label>
+                <select id="role" pInputSelect [(ngModel)]="selectedUser.role" required>
+                    <option value="admin">Admin</option>
+                    <option value="user">User</option>
+                </select>
+            </div>
+        </div>
+        <div class="p-dialog-footer">
+            <button pButton type="button" label="Save" (click)="saveUser()"
+                [disabled]="!selectedUser.name || !selectedUser.email || !selectedUser.role"></button>
+            <button pButton type="button" label="Cancel" (click)="displayDialog = false"></button>
+        </div>
+    </p-dialog>
+</section> 
+
+<p-toast></p-toast>
+

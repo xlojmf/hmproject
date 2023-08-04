@@ -1,0 +1,42 @@
+<div class="surface-section px-4 py-8 md:px-6 lg:px-8" *ngIf="cart">
+    <div class="flex flex-column align-items-center mb-6">
+      <div class="text-900 text-4xl mb-4 font-medium">Your cart total is {{ total | currency: 'EUR'  }}</div>
+      <p class="text-600 font-medium text-xl mt-0 mb-4">FREE SHIPPING</p>
+      <button pbutton="" pripple="" label="Check Out" class="p-element p-ripple p-button p-component">
+        <span class="p-button-label">Check Out</span>
+        <span class="p-ink"></span>
+      </button>
+    </div>
+    <ul class="list-none p-0 m-0">
+      <li *ngFor="let product of products" class="flex flex-column md:flex-row py-6 border-top-1 border-bottom-1 surface-border md:align-items-center">
+        <img [src]="product.foto_principal" class="w-12rem flex-shrink-0 mx-auto md:mx-0">
+        <div class="flex-auto py-5 md:pl-5">
+          <div class="flex flex-wrap align-items-start sm:align-items-center sm:flex-row sm:justify-content-between surface-border pb-6">
+            <div class="w-full sm:w-6 flex flex-column">
+              <span class="text-900 text-xl font-medium mb-3">{{ product.nome }}</span>
+              <span class="text-600">{{ product.marca }}</span>
+            </div>
+            <div class="w-full sm:w-6 flex align-items-start justify-content-between mt-3 sm:mt-0">
+              <div>
+                Quantity: {{ getQuantity(product.id) }}
+              </div>
+              <div class="flex flex-column sm:align-items-end">
+                <span class="text-900 text-2xl font-medium mb-2 sm:mb-3">{{ product.preco | currency: 'EUR'  }}</span>
+                <a tabindex="0" class="cursor-pointer text-pink-500 font-medium hover:text-pink-600 transition-colors transition-duration-300" (click)="removeProduct(product.id)">Remove</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+    <div class="flex">
+      <div class="w-12rem hidden md:block"></div>
+      <ul class="list-none py-0 pr-0 pl-0 md:pl-5 mt-6 mx-0 mb-0 flex-auto">
+        <li class="flex justify-content-between mb-4"><span class="text-xl text-900">Subtotal</span><span class="text-xl text-900">{{ total | currency: 'EUR'  }}</span></li>
+        <li class="flex justify-content-between mb-4"><span class="text-xl text-900">Shipping</span><span class="text-xl text-900">Free</span></li>
+        <li class="flex justify-content-between border-top-1 surface-border mb-4 pt-4"><span class="text-xl text-900 font-bold text-3xl">Total</span><span class="text-xl text-900 font-bold text-3xl">{{ total | currency: 'EUR'  }}</span></li>
+        <li class="flex justify-content-end"><button pbutton="" pripple="" label="Check Out" class="p-element p-ripple p-button p-component"><span class="p-button-label">Check Out</span><span class="p-ink"></span></button></li>
+      </ul>
+    </div>
+  </div>
+  <p-toast></p-toast>

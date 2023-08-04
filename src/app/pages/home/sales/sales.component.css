@@ -1,0 +1,38 @@
+.sales-carousel {
+  text-align: center;
+}
+
+.carousel-title {
+  font-weight: bold;
+  font-size: 5rem;
+}
+
+.carousel-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.sales-carousel ::ng-deep .p-carousel-prev,
+.sales-carousel ::ng-deep .p-carousel-next {
+  display: none;
+}
+
+.carousel-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-weight: bold;
+  font-size: 24px;
+  text-align: center;
+  width: 100%;
+}

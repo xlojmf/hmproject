@@ -1,0 +1,51 @@
+<h2>Profile</h2>
+
+<div *ngIf="user">
+    <p><strong>Name:</strong> {{ user.name }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <p><strong>Address:</strong> {{ user.adress }}</p>
+    <p><strong>Postal Code:</strong> {{ user.postalcode }}</p>
+    <p><strong>Country:</strong> {{ user.country }}</p>
+</div>
+
+<div>
+    <h3>Update Profile</h3>
+    <form (ngSubmit)="updateProfile()">
+        <div>
+            <label for="name">Name:</label>
+            <input pInputText type="text" id="name" [(ngModel)]="user.name" name="name">
+        </div>
+        <div>
+            <label for="email">Email:</label>
+            <input pInputText type="email" id="email" [(ngModel)]="user.email" name="email">
+        </div>
+        <div>
+            <label for="adress">Address:</label>
+            <input pInputText type="text" id="adress" [(ngModel)]="user.adress" name="adress">
+        </div>
+        <div>
+            <label for="postalcode">Postal Code:</label>
+            <input pInputText type="text" id="postalcode" [(ngModel)]="user.postalcode" name="postalcode">
+        </div>
+        <div>
+            <label for="country">Country:</label>
+            <input pInputText  type="text" id="country" [(ngModel)]="user.country" name="country">
+        </div>
+        <button type="submit" pButton label="Update"></button>
+    </form>
+</div>
+
+<div>
+    <h3>Change Password</h3>
+    <form (ngSubmit)="changePassword()">
+        <div>
+            <label for="oldPassword">Old Password:</label>
+            <input pPassword type="password" id="oldPassword" [(ngModel)]="oldPassword" name="oldPassword">
+        </div>
+        <div>
+            <label for="newPassword">New Password:</label>
+            <input pPassword type="password" id="newPassword" [(ngModel)]="newPassword" name="newPassword">
+        </div>
+        <button type="submit" pButton label="Change Password"></button>
+    </form>
+</div>
